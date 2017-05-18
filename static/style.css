@@ -21,11 +21,10 @@ div#header h1{
     color: white;
 }
 div#topRight{
-    /*background: yellow;*/
     vertical-align: top;
     text-align: right;
-    /*height: 50px;*/
-    width: 200px;
+    width: 500px;
+    height: 60px;
     display: inline-block;
     float: right;
 }
@@ -77,8 +76,8 @@ h1{
     text-align: center;
 }
 h2{
-    display: inline-block;
     vertical-align: top;
+    text-align: right;
 }
 h3{
     margin-top: 10px;
