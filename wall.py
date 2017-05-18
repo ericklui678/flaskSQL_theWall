@@ -127,8 +127,23 @@ def logout():
 
 @app.route('/wall')
 def wall():
-    return render_template('wall.html')
+    query = "SELECT CONCAT_WS(' ', users.first_name, users.last_name) as name, DATE_FORMAT(messages.created_at, '%M %d %Y %l:%i %p') as date, messages.message FROM messages LEFT JOIN users ON messages.user_id = users.id ORDER BY messages.created_at DESC"
+    wall_messages = mysql.query_db(query)
+    return render_template('wall.html', wall_messages=wall_messages)
 
+@app.route('/message', methods=['POST'])
+def message():
+    message = request.form['message_box']
+
+    query = "INSERT INTO messages(user_id, message, created_at, updated_at) VALUES (:user_id, :message, NOW(), NOW())"
+    data = {'user_id': session['userID'], 'message': message}
+    mysql.query_db(query, data)
+
+    return redirect('/wall')
+
+
+# INSERT INTO messages (user_id, message, created_at, updated_at)
+# VALUES (1, 'this is a test message', NOW(), NOW())
 
 # USE THIS STUFF LATER ----------------------------------------------------------------
 # @app.route('/login', methods=['POST'])

@@ -1,0 +1,81 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif, serif;
+    font-weight: 400;
+}
+body{
+    background-color: #e9ebee;
+}
+div#wrapper{
+
+}
+div#header{
+    background-color: #06aae2;
+    height: 60px;
+    padding: 20px;
+}
+div#topRight{
+    vertical-align: top;
+    text-align: right;
+    width: 500px;
+    height: 60px;
+    display: inline-block;
+    float: right;
+}
+img#dojo{
+    height: 60px;
+    display: inline-block;
+}
+#logoffButton{
+    cursor: pointer;
+    background-color: #06aae2;
+    border: none;
+    font-size: 10pt;
+    color: purple;
+    text-decoration: underline;
+}
+div#content{
+    /*background-color: silver;*/
+    margin: auto;
+    width: 800px;
+    height: 100%;
+}
+div#post_a_message{
+    padding: 10px;
+}
+#main_message{
+    height: 150px;
+}
+#message_box{
+    width: 740px;
+    padding: 10px;
+    resize: none;
+}
+#submitButton{
+    background-color: #06aae2;
+    border: 1px solid #0066CC;
+    display: block;
+    height: 20px;
+    width: 100px;
+    margin-left: 662px;
+    border: none;
+}
+div#message_section{
+    /*background-color: yellow;*/
+    width: 762px;
+    height: 900px;
+    padding: 10px;
+}
+.message{
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+.message h3{
+    margin-bottom: 5px;
+}
+.message p{
+    margin-left: 20px;
+    font-size: 10pt;
+}

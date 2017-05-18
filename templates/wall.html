@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>The Wall</title>
-        <link rel="stylesheet" type="text/css" href="{{  url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{  url_for('static', filename='wall.css') }}">
     </head>
     <body>
         <div id="wrapper">
@@ -14,8 +14,24 @@
                     <form id="logoff" action="/logoff" method="post">
                         <input id="logoffButton" type="submit" name="logoff" value="Log Out">
                     </form>
-                </div>
+                </div> <!-- topRight -->
             </div> <!-- header -->
+            <div id="content">
+                <div id="post_a_message">
+                    <form id="main_message" action="/message" method="post">
+                        <textarea id="message_box" name="message_box" rows="8" cols="80" placeholder="Write a message..."></textarea>
+                        <input id="submitButton" type="submit" name="submit" value="Post a message">
+                    </form>
+                </div> <!-- post_a_message -->
+                <div id="message_section">
+                    {% for dict in wall_messages %}
+                        <div class="message">
+                            <h3>{{ dict['name'] }} - {{ dict['date'] }}</h3>
+                            <p>{{ dict['message'] }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div> <!-- content -->
         </div> <!-- wrapper -->
     </body>
 </html>
