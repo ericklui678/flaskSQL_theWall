@@ -1,0 +1,131 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif, serif;
+    font-weight: 400;
+}
+body{
+    background-color: #e9ebee;
+}
+div#wrapper{
+    margin: auto;
+}
+div#header{
+    background-color: #06aae2;
+    height: 60px;
+    padding: 20px;
+}
+div#header h1{
+    text-align: left;
+    padding-top: 30px;
+    color: white;
+}
+div#topRight{
+    /*background: yellow;*/
+    vertical-align: top;
+    text-align: right;
+    /*height: 50px;*/
+    width: 200px;
+    display: inline-block;
+    float: right;
+}
+img#dojo{
+    height: 60px;
+    display: inline-block;
+}
+#login{
+    display: inline-block;
+    height: 20px;
+    vertical-align: top;
+    float: right;
+    margin-top: 15px;
+}
+#loginButton{
+    background-color: #0066CC;
+    color: white;
+    height: 30px;
+    width: 50px;
+    border: none;
+    border-radius: 3px;
+}
+/* removes autofill color */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+.loginField{
+    height: 30px;
+    border: 1px solid #bdc7d8;
+    padding-left: 5px;
+}
+#logoff{
+    text-align: right;
+    float: right;
+    height: 20px;
+}
+#logoffButton{
+    cursor: pointer;
+    background-color: #06aae2;
+    border: none;
+    font-size: 10pt;
+    color: purple;
+    text-decoration: underline;
+}
+h1{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 25pt;
+    text-align: center;
+}
+h2{
+    display: inline-block;
+    vertical-align: top;
+}
+h3{
+    margin-top: 10px;
+}
+form{
+    width: 330px;
+    height: 500px;
+    margin: auto;
+}
+.nameField, .longField{
+    text-align: left;
+    height: 40px;
+    font-size: 12pt;
+    border-radius: 5px;
+    border: 1px solid #bdc7d8;
+    padding-left: 5px;
+    margin-bottom: 5px;
+
+}
+.nameField{
+    width: 155px;
+}
+.longField{
+    width: 321px;
+}
+#submit{
+    background-color: #06aae2;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid #0066CC;
+    margin-top: 10px;
+    width: 325px;
+    height: 40px;
+    font-size: 14pt;
+}
+ul{
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 10pt;
+    color: red
+}
+form ul .show{
+    display: block;
+    color: black;
+    margin-left: -20px;
+}
+#date{
+    display: block;
+    width: 160px;
+}

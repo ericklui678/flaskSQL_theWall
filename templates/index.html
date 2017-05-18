@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>CodingDojo Wall</title>
+        <link rel="stylesheet" type="text/css" href="{{  url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="header">
+                <a href="/"><img id="dojo" src="/static/dojo.png" alt="coding dojo icon"></a>
+                <form id="login" action="/login" method="post">
+                    <input class="loginField" type="text" name="email" placeholder="Email">
+                    <input class="loginField" type="password" name="password" placeholder="Password">
+                    <input id="loginButton" type="submit" name="submit" value="Login">
+                </form>
+            </div> <!-- header -->
+            <h1>Create a New Account</h1>
+            <form action="/create" method="post">
+                <input class=nameField type="text" name="first_name" placeholder="First name">
+                <input class=nameField type="text" name="last_name" placeholder="Last name">
+                <input class=longField type="text" name="email" placeholder="Email">
+                <input class=longField type="password" name="password" placeholder="Password">
+                <input class=longField type="password" name="confirm" placeholder="Confirm password">
+                <input id=submit type="submit" value="Register">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                  {% if messages %}
+                    <ul class=flashes>
+                    {% for category, message in messages %}
+                      <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+            </form>
+        </div> <!-- wrapper -->
+    </body>
+</html>
