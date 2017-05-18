@@ -26,11 +26,27 @@
                 <div id="message_section">
                     {% for dict in wall_messages %}
                         <div class="message">
-                            <h3>{{ dict['name'] }} - {{ dict['date'] }}</h3>
+                            <h3>{{ dict['name'] }} - {{ dict['date'] }} </h3>
                             <p>{{ dict['message'] }}</p>
-                        </div>
+                            <div class="comment_output">
+                                {% for i in comments %}
+                                    {% if i['message_id'] == dict['id'] %}
+                                    <div class="each_comment">
+                                        <h4>{{ i['name'] }} - {{ i['date'] }} {{ i['date']}}</h4>
+                                        <p>{{ i['comment'] }}</p>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="comment">
+                                <form action="/comment/{{ dict['id'] }}" method="post">
+                                    <textarea class="comment_box" name="comment_box" rows="8" cols="80" placeholder="Write a comment..."></textarea>
+                                    <input class="comment_button" type="submit" name="submit" value="Post a comment">
+                                </form>
+                            </div> <!-- comment -->
+                        </div> <!-- message -->
                     {% endfor %}
-                </div>
+                </div> <!-- message_section -->
             </div> <!-- content -->
         </div> <!-- wrapper -->
     </body>

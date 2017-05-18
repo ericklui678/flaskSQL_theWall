@@ -52,8 +52,40 @@ div#post_a_message{
     padding: 10px;
     resize: none;
 }
+.comment{
+    /*background-color: yellow;*/
+    margin-top: 20px;
+    text-align: right;
+    margin-right: 10px;
+}
+.comment_box{
+    resize: none;
+    width: 670px;
+    padding: 10px;
+}
+.comment_button{
+    display: block;
+    float:right;
+}
+.comment_output{
+    /*background-color: yellow;*/
+    margin-top: 20px;
+    margin-left: 40px;
+}
+.each_comment{
+    margin-bottom: 20px;
+}
 #submitButton{
     background-color: #06aae2;
+    border: 1px solid #0066CC;
+    display: block;
+    height: 20px;
+    width: 100px;
+    margin-left: 662px;
+    border: none;
+}
+.comment_button{
+    background-color: #00cc00;
     border: 1px solid #0066CC;
     display: block;
     height: 20px;
@@ -64,13 +96,13 @@ div#post_a_message{
 div#message_section{
     /*background-color: yellow;*/
     width: 762px;
-    height: 900px;
     padding: 10px;
 }
 .message{
     background-color: white;
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 10px 10px 30px 10px;
+    /*height: 500px;*/
 }
 .message h3{
     margin-bottom: 5px;

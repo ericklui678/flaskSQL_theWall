@@ -127,9 +127,15 @@ def logout():
 
 @app.route('/wall')
 def wall():
-    query = "SELECT CONCAT_WS(' ', users.first_name, users.last_name) as name, DATE_FORMAT(messages.created_at, '%M %d %Y %l:%i %p') as date, messages.message FROM messages LEFT JOIN users ON messages.user_id = users.id ORDER BY messages.created_at DESC"
+    # query to show all messages
+    query = "SELECT CONCAT_WS(' ', users.first_name, users.last_name) as name, DATE_FORMAT(messages.created_at, '%M %d %Y %l:%i %p') as date, messages.message, messages.id FROM messages LEFT JOIN users ON messages.user_id = users.id ORDER BY messages.created_at DESC"
     wall_messages = mysql.query_db(query)
-    return render_template('wall.html', wall_messages=wall_messages)
+
+    # query to show all comments
+    query = "SELECT CONCAT_WS(' ', users.first_name, users.last_name) as name, DATE_FORMAT(comments.created_at, '%M %d %Y %l:%i %p') as date, comments.comment, comments.message_id FROM comments LEFT JOIN users ON comments.user_id = users.id ORDER BY comments.created_at DESC"
+    comments = mysql.query_db(query)
+
+    return render_template('wall.html', wall_messages=wall_messages, comments=comments)
 
 @app.route('/message', methods=['POST'])
 def message():
@@ -141,6 +147,20 @@ def message():
 
     return redirect('/wall')
 
+@app.route('/comment/<mID>', methods=['POST'])
+def comment(mID):
+    comment = request.form['comment_box']
+
+    query = "INSERT INTO comments (message_id, user_id, comment, created_at, updated_at) VALUES (:message_id, :user_id, :comment, NOW(), NOW())"
+    data = {'message_id': mID, 'user_id': session.get('userID'), 'comment': comment}
+    mysql.query_db(query, data)
+
+    return redirect('/wall')
+
+
+# {% if i['message_id'] == dict['id'] %}
+#     hello
+# {% endif %}
 
 # INSERT INTO messages (user_id, message, created_at, updated_at)
 # VALUES (1, 'this is a test message', NOW(), NOW())
