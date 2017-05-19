@@ -124,15 +124,14 @@ def logout():
     session.clear()
     return redirect('/')
 
-
 @app.route('/wall')
 def wall():
     # query to show all messages
-    query = "SELECT CONCAT_WS(' ', users.first_name, users.last_name) as name, DATE_FORMAT(messages.created_at, '%M %d %Y %l:%i %p') as date, messages.message, messages.id FROM messages LEFT JOIN users ON messages.user_id = users.id ORDER BY messages.created_at DESC"
+    query = "SELECT CONCAT_WS(' ', users.first_name, users.last_name) as name, DATE_FORMAT(messages.created_at, '%M %d %Y %l:%i %p') as date, messages.message, messages.id, users.id as user_id FROM messages LEFT JOIN users ON messages.user_id = users.id ORDER BY messages.created_at DESC"
     wall_messages = mysql.query_db(query)
 
     # query to show all comments
-    query = "SELECT CONCAT_WS(' ', users.first_name, users.last_name) as name, DATE_FORMAT(comments.created_at, '%M %d %Y %l:%i %p') as date, comments.comment, comments.message_id FROM comments LEFT JOIN users ON comments.user_id = users.id ORDER BY comments.created_at DESC"
+    query = "SELECT CONCAT_WS(' ', users.first_name, users.last_name) as name, DATE_FORMAT(comments.created_at, '%M %d %Y %l:%i %p') as date, comments.comment, comments.message_id, comments.user_id as user_id, comments.id as comID FROM comments LEFT JOIN users ON comments.user_id = users.id ORDER BY comments.created_at"
     comments = mysql.query_db(query)
 
     return render_template('wall.html', wall_messages=wall_messages, comments=comments)
@@ -157,43 +156,28 @@ def comment(mID):
 
     return redirect('/wall')
 
+@app.route('/delete/<mID>', methods=['POST'])
+def delete_message(mID):
+    query = "SET FOREIGN_KEY_CHECKS = 0"
+    mysql.query_db(query)
+    query = "SET SQL_SAFE_UPDATES = 0"
+    mysql.query_db(query)
+    query = "DELETE FROM messages WHERE id = :id"
+    data = {'id': mID}
+    mysql.query_db(query, data)
 
-# {% if i['message_id'] == dict['id'] %}
-#     hello
-# {% endif %}
+    return redirect('/wall')
 
-# INSERT INTO messages (user_id, message, created_at, updated_at)
-# VALUES (1, 'this is a test message', NOW(), NOW())
+@app.route('/remove/<cID>', methods=['POST'])
+def delete_comment(cID):
+    query = "SET SQL_SAFE_UPDATES = 0"
+    mysql.query_db(query)
+    # query = "SET SQL_SAFE_UPDATES = 0"
+    # mysql.query_db(query)
+    query = "DELETE FROM comments WHERE id = :id"
+    data = {'id': cID}
+    mysql.query_db(query, data)
 
-# USE THIS STUFF LATER ----------------------------------------------------------------
-# @app.route('/login', methods=['POST'])
-# def login():
-#     email = request.form['email']
-#     password = request.form['password']
-#     # query to return email if found on db
-#     query = "SELECT * FROM users WHERE email = :email LIMIT 1"
-#     data = {'email': email}
-#     output = mysql.query_db(query, data)
-#     print output
-#     # if the email is found
-#     if len(output) != 0:
-#         encrypted_password = md5.new(password + output[0]['salt']).hexdigest()
-#         # if the hashed passwords match
-#         if output[0]['password'] == encrypted_password:
-#             session['userID'] = output[0]['id']
-#             print session['userID']
-#             return redirect('/success')se
-#         else:
-#             flash('PASSWORD INCORRECT')
-#     else:
-#         flash('EMAIL DOES NOT EXIST IN DB')
-#
-#     return redirect('/')
-#
-# @app.route('/success')
-# def success():
-#     return render_template('success.html')
-#
-# app.run(debug = True)
+    return redirect('/wall')
 
 app.run(debug = True)

@@ -93,8 +93,16 @@ div#post_a_message{
     margin-left: 662px;
     border: none;
 }
+.delete_button{
+    background-color: #FF3333;
+    display: inline-block;
+    height: 20px;
+    width: 70px;
+    margin-left: 662px;
+    border: none;
+}
+
 div#message_section{
-    /*background-color: yellow;*/
     width: 762px;
     padding: 10px;
 }

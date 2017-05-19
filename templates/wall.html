@@ -26,14 +26,24 @@
                 <div id="message_section">
                     {% for dict in wall_messages %}
                         <div class="message">
-                            <h3>{{ dict['name'] }} - {{ dict['date'] }} </h3>
+                            <h3>{{ dict['name'] }} - {{ dict['date'] }}</h3>
                             <p>{{ dict['message'] }}</p>
+                            {% if session['userID'] == dict['user_id']%}
+                                <form action="/delete/{{dict['id']}}" method="post">
+                                    <input class="delete_button" type="submit" name="delete_button" value="Delete">
+                                </form>
+                            {% endif %}
                             <div class="comment_output">
                                 {% for i in comments %}
                                     {% if i['message_id'] == dict['id'] %}
                                     <div class="each_comment">
-                                        <h4>{{ i['name'] }} - {{ i['date'] }} {{ i['date']}}</h4>
+                                        <h4>{{ i['name'] }} - {{ i['date'] }}</h4>
                                         <p>{{ i['comment'] }}</p>
+                                        {% if session['userID'] == i['user_id']%}
+                                            <form action="/remove/{{i['comID']}}" method="post">
+                                                <input class="comment_delete" type="submit" name="delete_button" value="Delete">
+                                            </form>
+                                        {% endif %}
                                     </div>
                                     {% endif %}
                                 {% endfor %}
